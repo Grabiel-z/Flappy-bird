@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b70yc3ls7uhsc"]
+
+[ext_resource type="Script" path="res://scripts/pipes_runs.gd" id="1_iog0l"]
+[ext_resource type="PackedScene" uid="uid://bpwqfph1tmwu8" path="res://scenes/pipeline.tscn" id="1_k7lp3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1aa24"]
+size = Vector2(32, 160)
+
+[node name="PipesRuns" type="Node2D"]
+position = Vector2(320, 144)
+script = ExtResource("1_iog0l")
+metadata/_edit_group_ = true
+
+[node name="PipelineDown" parent="." instance=ExtResource("1_k7lp3")]
+position = Vector2(24, 336)
+
+[node name="PipelineUp" parent="." instance=ExtResource("1_k7lp3")]
+position = Vector2(16, -496)
+rotation = 3.14159
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(96, -80)
+
+[node name="AreaAddPoint" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAddPoint"]
+position = Vector2(64, -80)
+shape = SubResource("RectangleShape2D_1aa24")
+
+[connection signal="body_entered" from="PipelineDown" to="." method="_on_pipeline_bird"]
+[connection signal="body_entered" from="PipelineUp" to="." method="_on_pipeline_bird"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_delete"]
+[connection signal="body_entered" from="AreaAddPoint" to="." method="_on_area_add_point_body_entered"]
