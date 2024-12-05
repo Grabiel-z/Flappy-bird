@@ -1,15 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgiutrg7uw8da"]
+[gd_scene load_steps=9 format=3 uid="uid://dgiutrg7uw8da"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_2d2d7"]
 [ext_resource type="Texture2D" uid="uid://bnokro2h1jngn" path="res://art/sprites/background-day.png" id="1_4jo0d"]
 [ext_resource type="PackedScene" uid="uid://b70yc3ls7uhsc" path="res://scenes/pipes_runs.tscn" id="2_jysfw"]
 [ext_resource type="Texture2D" uid="uid://bsul4pmobqqwx" path="res://art/sprites/base.png" id="2_po8p4"]
+[ext_resource type="AudioStream" uid="uid://cupp5k6afdnsa" path="res://art/audio/hit.wav" id="3_2mmb2"]
 [ext_resource type="PackedScene" uid="uid://b1ssu6e201hm5" path="res://scenes/bird.tscn" id="3_jwu1p"]
 [ext_resource type="PackedScene" uid="uid://bpxpw035ptex1" path="res://scenes/gui.tscn" id="3_srlk3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cyykb"]
+size = Vector2(286, 7)
 
 [node name="level" type="Node"]
 script = ExtResource("1_2d2d7")
 pipes_runs_scene = ExtResource("2_jysfw")
+
+[node name="AudioGameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2mmb2")
 
 [node name="GUI" parent="." instance=ExtResource("3_srlk3")]
 
@@ -31,8 +38,16 @@ texture = ExtResource("2_po8p4")
 
 [node name="Bird" parent="." instance=ExtResource("3_jwu1p")]
 z_index = 1
-position = Vector2(74, 221)
+position = Vector2(143, 185)
 
 [node name="TimerPipes" type="Timer" parent="."]
+wait_time = 0.872
+
+[node name="AreaFloor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaFloor"]
+position = Vector2(145, 508.5)
+shape = SubResource("RectangleShape2D_cyykb")
 
 [connection signal="timeout" from="TimerPipes" to="." method="_on_timer_pipes_timeout"]
+[connection signal="body_entered" from="AreaFloor" to="." method="_on_area_floor_body_entered"]

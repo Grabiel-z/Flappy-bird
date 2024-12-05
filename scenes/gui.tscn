@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpxpw035ptex1"]
+[gd_scene load_steps=5 format=3 uid="uid://bpxpw035ptex1"]
 
 [ext_resource type="Script" path="res://scripts/gui.gd" id="1_bf8q0"]
 [ext_resource type="FontFile" uid="uid://dvw7oo7po015d" path="res://art/fonts/flappy-font.ttf" id="1_qb3hd"]
+[ext_resource type="Texture2D" uid="uid://cd226djdqmcp" path="res://art/sprites/message.png" id="3_mwuv2"]
+[ext_resource type="Texture2D" uid="uid://c7yrmhp25ggg0" path="res://art/sprites/gameover.png" id="4_7wl4x"]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_bf8q0")
@@ -18,3 +20,11 @@ theme_override_fonts/font = ExtResource("1_qb3hd")
 theme_override_font_sizes/font_size = 50
 text = "0"
 horizontal_alignment = 1
+
+[node name="Message" type="Sprite2D" parent="."]
+position = Vector2(144, 248)
+texture = ExtResource("3_mwuv2")
+
+[node name="Gameover" type="Sprite2D" parent="."]
+position = Vector2(144, 192)
+texture = ExtResource("4_7wl4x")

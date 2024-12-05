@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b70yc3ls7uhsc"]
+[gd_scene load_steps=6 format=3 uid="uid://b70yc3ls7uhsc"]
 
 [ext_resource type="Script" path="res://scripts/pipes_runs.gd" id="1_iog0l"]
 [ext_resource type="PackedScene" uid="uid://bpwqfph1tmwu8" path="res://scenes/pipeline.tscn" id="1_k7lp3"]
+[ext_resource type="AudioStream" uid="uid://cupp5k6afdnsa" path="res://art/audio/hit.wav" id="3_585pl"]
+[ext_resource type="AudioStream" uid="uid://u0y2k547d75r" path="res://art/audio/point.wav" id="4_lngh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1aa24"]
 size = Vector2(32, 160)
@@ -26,6 +28,12 @@ position = Vector2(96, -80)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAddPoint"]
 position = Vector2(64, -80)
 shape = SubResource("RectangleShape2D_1aa24")
+
+[node name="AudioGameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_585pl")
+
+[node name="AudioScore" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lngh6")
 
 [connection signal="body_entered" from="PipelineDown" to="." method="_on_pipeline_bird"]
 [connection signal="body_entered" from="PipelineUp" to="." method="_on_pipeline_bird"]
